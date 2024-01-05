@@ -3,7 +3,6 @@ package frc.slicelibs.util.config;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.Constants;
 
@@ -16,7 +15,7 @@ public final class CTREConfigs {
         /* Motor Inverts and Neutral Mode */
         var driveMotorOutput = swerveDriveFXConfig.MotorOutput;
         driveMotorOutput.Inverted = Constants.kDrivetrain.DRIVE_INVERT;
-        driveMotorOutput.NeutralMode = NeutralModeValue.Brake;
+        driveMotorOutput.NeutralMode = Constants.kDrivetrain.DRIVE_NEUTRAL_MODE;
 
         /* Current Limiting */
         var driveCurrentLimits = swerveDriveFXConfig.CurrentLimits;

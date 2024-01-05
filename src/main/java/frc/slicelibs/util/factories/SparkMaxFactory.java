@@ -2,16 +2,16 @@ package frc.slicelibs.util.factories;
 
 import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
-import java.util.ArrayList;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+
 import frc.slicelibs.util.config.REVConfigs;
 import frc.slicelibs.util.config.REVConfigs.SparkMaxConfiguration;
+
+import java.util.ArrayList;
 
 public class SparkMaxFactory {
 
