@@ -107,8 +107,8 @@ public final class Constants {
     public static final double MAX_ANGULAR_VELOCITY = 7; // radians per second
 
     /* Neutral Modes */
-    public static final IdleMode ANGLE_NEUTRAL_MODE = IdleMode.kCoast;
-    public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
+    public static final IdleMode ANGLE_IDLE_MODE = IdleMode.kCoast;
+    public static final NeutralModeValue DRIVE_IDLE_MODE = NeutralModeValue.Brake;
 
     /* Motor Inverts */
     public static final InvertedValue DRIVE_INVERT = InvertedValue.CounterClockwise_Positive;

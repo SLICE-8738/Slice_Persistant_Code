@@ -82,7 +82,7 @@ public final class REVConfigs {
         300);
 
     public static final SparkMaxConfiguration angleSparkMaxConfig = new SparkMaxConfiguration(
-        Constants.kDrivetrain.ANGLE_NEUTRAL_MODE, 
+        Constants.kDrivetrain.ANGLE_IDLE_MODE, 
         Constants.kDrivetrain.ANGLE_INVERT, 
         false, 
         12, 

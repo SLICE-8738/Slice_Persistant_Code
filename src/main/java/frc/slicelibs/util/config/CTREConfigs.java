@@ -15,7 +15,7 @@ public final class CTREConfigs {
         /* Motor Inverts and Neutral Mode */
         var driveMotorOutput = swerveDriveFXConfig.MotorOutput;
         driveMotorOutput.Inverted = Constants.kDrivetrain.DRIVE_INVERT;
-        driveMotorOutput.NeutralMode = Constants.kDrivetrain.DRIVE_NEUTRAL_MODE;
+        driveMotorOutput.NeutralMode = Constants.kDrivetrain.DRIVE_IDLE_MODE;
 
         /* Current Limiting */
         var driveCurrentLimits = swerveDriveFXConfig.CurrentLimits;
