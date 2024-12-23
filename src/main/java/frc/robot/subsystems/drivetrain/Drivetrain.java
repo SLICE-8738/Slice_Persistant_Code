@@ -210,11 +210,11 @@ public class Drivetrain extends SubsystemBase {
     if (!DriverStation.isAutonomousEnabled()) {
 
       LimelightHelpers.SetRobotOrientation("limelight", getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-      LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight-shooter");
+      LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
 
       if (estimate.tagCount >= 2) {
 
-        Translation3d aprilTagPosition = LimelightHelpers.getTargetPose3d_CameraSpace("limelight-shooter").getTranslation();
+        Translation3d aprilTagPosition = LimelightHelpers.getTargetPose3d_CameraSpace("limelight").getTranslation();
 
         if (Math.hypot(aprilTagPosition.getX(), aprilTagPosition.getZ()) <= 4.5) {
         
@@ -320,8 +320,8 @@ public class Drivetrain extends SubsystemBase {
    * in degrees from the absolute encoders of all swerve modules 
    * without offsets.
    * 
-   * @return The current absolute angle readings in degrees from the CANCoders
-   *         of all swerve modules without offsets.
+   * @return The current absolute angle readings in degrees from the
+   *         absolute encoders of all swerve modules without offsets.
    */
   public double[] getAbsoluteAngles() {
 
@@ -340,8 +340,8 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Sets the positions of the integrated angle motor
    * encoders of all swerve modules to the absolute position
-   * readings of the CANCoders with their offsets being taken
-   * into account.
+   * readings of the absolute encoders with their offsets being 
+   * taken into account.
    */
   public void resetModulesToAbsolute() {
 

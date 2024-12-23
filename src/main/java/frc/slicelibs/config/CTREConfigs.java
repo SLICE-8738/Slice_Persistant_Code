@@ -8,7 +8,6 @@ import frc.robot.Constants;
 public final class CTREConfigs {
     public final TalonFXConfiguration swerveDriveFXConfig = new TalonFXConfiguration();
     public final CANcoderConfiguration swerveCANcoderConfig = new CANcoderConfiguration();
-    public final TalonFXConfiguration flywheelFXConfig = new TalonFXConfiguration();
 
     public CTREConfigs() {
         /** Swerve Drive Motor Configuration */

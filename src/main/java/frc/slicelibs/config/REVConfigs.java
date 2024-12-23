@@ -55,11 +55,11 @@ public class REVConfigs {
         /* Swerve Module Angle Motor Configuration */
 
             /* Motor Invert and Idle Mode */
-            angleSparkMaxConfig.inverted(Constants.kShooter.AIM_INVERT);
-            angleSparkMaxConfig.idleMode(Constants.kShooter.AIM_IDLE_MODE);
+            angleSparkMaxConfig.inverted(Constants.kDrivetrain.ANGLE_INVERT);
+            angleSparkMaxConfig.idleMode(Constants.kDrivetrain.ANGLE_IDLE_MODE);
 
             /* Current Limiting */
-            angleSparkMaxConfig.smartCurrentLimit(20);
+            angleSparkMaxConfig.smartCurrentLimit(Constants.kDrivetrain.ANGLE_CURRENT_LIMIT);
 
             /* Open and Closed Loop Ramping */
             angleSparkMaxConfig.openLoopRampRate(0);
@@ -73,8 +73,8 @@ public class REVConfigs {
             angleSparkMaxConfig.voltageCompensation(12);
 
             /* Conversion Factors */
-            angleSparkMaxConfig.encoder.positionConversionFactor(Constants.kDrivetrain.DRIVE_POSITION_CONVERSION_FACTOR);
-            angleSparkMaxConfig.encoder.velocityConversionFactor(Constants.kDrivetrain.DRIVE_VELOCITY_CONVERSION_FACTOR);
+            angleSparkMaxConfig.encoder.positionConversionFactor(Constants.kDrivetrain.ANGLE_POSITION_CONVERSION_FACTOR);
+            angleSparkMaxConfig.encoder.velocityConversionFactor(Constants.kDrivetrain.ANGLE_VELOCITY_CONVERSION_FACTOR);
 
             /* PID */
             angleSparkMaxConfig.closedLoop.p(Constants.kDrivetrain.DRIVE_KP);

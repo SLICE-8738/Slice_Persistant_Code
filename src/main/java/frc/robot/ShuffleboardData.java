@@ -41,26 +41,26 @@ public class ShuffleboardData {
         withPosition(0, 3).
         withSize(2, 1);
         
-        //Displays the current CANCoder angle in degrees with no offset of the left front swerve module on Shuffleboard
-        swerveTab.addDouble("Left Front CANCoder Angle", () -> drivetrain.getAbsoluteAngles()[0]).
+        //Displays the current absolute encoder angle in degrees with no offset of the left front swerve module on Shuffleboard
+        swerveTab.addDouble("Left Front Absolute Angle", () -> drivetrain.getAbsoluteAngles()[0]).
         withWidget(BuiltInWidgets.kDial).
         withProperties(Map.of("Min", 0, "Max", 360)).
         withPosition(0, 1).
         withSize(2, 1);
-        //Displays the current CANCoder angle in degrees with no offset of the left back swerve module on Shuffleboard
-        swerveTab.addDouble("Right Front CANCoder Angle", () -> drivetrain.getAbsoluteAngles()[1]).
+        //Displays the current absolute encoder angle in degrees with no offset of the left back swerve module on Shuffleboard
+        swerveTab.addDouble("Right Front Absolute Angle", () -> drivetrain.getAbsoluteAngles()[1]).
         withWidget(BuiltInWidgets.kDial).
         withProperties(Map.of("Min", 0,"Max", 360)).
         withPosition(7, 1).
         withSize(2, 1);
-        //Displays the current CANCoder angle in degrees with no offset of the right front swerve module on Shuffleboard
-        swerveTab.addDouble("Right Back CANCoder Angle", () -> drivetrain.getAbsoluteAngles()[2]).
+        //Displays the current absolute encoder angle in degrees with no offset of the right front swerve module on Shuffleboard
+        swerveTab.addDouble("Right Back Absolute Angle", () -> drivetrain.getAbsoluteAngles()[2]).
         withWidget(BuiltInWidgets.kDial).
         withProperties(Map.of("Min", 0, "Max", 360)).
         withPosition(7, 2).
         withSize(2, 1);
-        //Displays the current CANCoder angle in degrees with no offset of the right back swerve module on Shuffleboard
-        swerveTab.addDouble("Left Back CANCoder Angle", () -> drivetrain.getAbsoluteAngles()[3]).
+        //Displays the current absolute encoder angle in degrees with no offset of the right back swerve module on Shuffleboard
+        swerveTab.addDouble("Left Back Absolute Angle", () -> drivetrain.getAbsoluteAngles()[3]).
         withWidget(BuiltInWidgets.kDial).
         withProperties(Map.of("Min", 0, "Max", 360)).
         withPosition(0, 2).

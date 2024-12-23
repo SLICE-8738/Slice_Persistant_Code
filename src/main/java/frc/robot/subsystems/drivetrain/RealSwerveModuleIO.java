@@ -74,7 +74,7 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
         angleMotor.setCANTimeout(200);
 
         /* Absolute Encoder Config */
-        angleEncoder = new AnalogEncoder(moduleConstants.absoluteEncoderID);
+        angleEncoder = new AnalogEncoder(moduleConstants.absoluteEncoderID, 360, 0);
         angleEncoder.setInverted(Constants.kDrivetrain.ABSOLUTE_ENCODER_INVERT);
 
         /* Drive Motor Status Signals */
@@ -122,6 +122,11 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
     public void runDriveDutyCycle(double percentOutput) {
         driveDutyCycleRequest.Output = percentOutput;
         driveMotor.setControl(driveDutyCycleRequest);
+    }
+
+    @Override
+    public void runAngleDutyCycle(double percentOutput) {
+        angleMotor.set(percentOutput);
     }
 
     @Override
