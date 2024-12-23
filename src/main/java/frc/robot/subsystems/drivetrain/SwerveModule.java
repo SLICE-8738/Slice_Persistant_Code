@@ -7,8 +7,8 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 
 import frc.robot.Constants;
-import frc.slicelibs.util.math.Conversions;
-import frc.slicelibs.util.math.OnboardModuleState;
+import frc.slicelibs.math.Conversions;
+import frc.slicelibs.math.OnboardModuleState;
 
 public class SwerveModule {
 
@@ -46,13 +46,13 @@ public class SwerveModule {
 
     /** Runs the module with the specified duty cycle percent outputs. */
     public void runDutyCycle(double drivePercentOutput, double anglePercentOutput) {
-        io.setDriveDutyCycle(drivePercentOutput);
-        io.setAngleDutyCycle(anglePercentOutput);
+        io.runDriveDutyCycle(drivePercentOutput);
+        io.runAngleDutyCycle(anglePercentOutput);
     }
 
     private void setSpeed(SwerveModuleState desiredState, boolean isOpenLoop) {
         if (isOpenLoop) {
-            io.setDriveDutyCycle(desiredState.speedMetersPerSecond / Constants.kDrivetrain.MAX_LINEAR_VELOCITY);
+            io.runDriveDutyCycle(desiredState.speedMetersPerSecond / Constants.kDrivetrain.MAX_LINEAR_VELOCITY);
         }
         else {
             io.setDriveVelocity(desiredState.speedMetersPerSecond);
@@ -60,7 +60,7 @@ public class SwerveModule {
     }
     
     private void setAngle(SwerveModuleState desiredState) {
-        // Prevent rotating module if speed is less then 1%. Prevents jittering.
+        // Prevent rotating module if speed is less than or equal to 1%. Prevents jittering.
         Rotation2d angle =
             (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.kDrivetrain.MAX_LINEAR_VELOCITY * 0.01))
                 ? lastAngle

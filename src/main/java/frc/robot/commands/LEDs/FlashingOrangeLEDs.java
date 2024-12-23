@@ -4,28 +4,24 @@
 
 package frc.robot.commands.LEDs;
 
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.LimelightHelpers;
-import frc.robot.subsystems.Intake;
+
 import frc.robot.subsystems.LEDs;
 
 public class FlashingOrangeLEDs extends Command {
   
   private final LEDs m_LEDs;
-  private final Intake m_Intake;
   private final Timer timer;
 
   /** Creates a new FlashingOrangeLEDs. */
-  public FlashingOrangeLEDs(LEDs leds, Intake intake) {
+  public FlashingOrangeLEDs(LEDs leds) {
     m_LEDs = leds; 
-    m_Intake = intake;
     timer = new Timer();
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_LEDs);
-    addRequirements(m_Intake);
   }
 
   // Called when the command is initially scheduled.

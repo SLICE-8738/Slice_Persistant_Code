@@ -48,7 +48,7 @@ public class VariableModeLEDs extends Command {
 
       }
 
-      if(ledMode == LEDMode.RAINBOW) {
+      if (ledMode == LEDMode.RAINBOW) {
 
         for(int i = 0; i < 77; i++) {
           final int hue = (m_rainbowFirstPixelHue + (i * 180 / 77 )) % 180;
@@ -61,7 +61,7 @@ public class VariableModeLEDs extends Command {
         m_leds.ledBuffer();
 
       }
-      else if(ledMode == LEDMode.SOLID_ORANGE) {
+      else if (ledMode == LEDMode.SOLID_ORANGE) {
 
         m_leds.setAllHSV(175, 255, 128);
 

@@ -27,7 +27,7 @@ public interface SwerveModuleIO {
   public default void updateInputs(SwerveModuleIOInputs inputs) {}
 
   /** Run the drive motor at the specified duty cycle percent output. */
-  public default void setDriveDutyCycle(double percentOutput) {}
+  public default void runDriveDutyCycle(double percentOutput) {}
 
   /** Run the drive motor at the specified voltage. */
   public default void setDriveVoltage(double volts) {}
@@ -36,7 +36,7 @@ public interface SwerveModuleIO {
   public default void setDriveVelocity(double velocity) {}
 
   /** Run the angle motor at the specified duty cycle percent output. */
-  public default void setAngleDutyCycle(double percentOutput) {}
+  public default void runAngleDutyCycle(double percentOutput) {}
 
   /** Run the angle motor at the specified voltage. */
   public default void setAngleVoltage(double volts) {}

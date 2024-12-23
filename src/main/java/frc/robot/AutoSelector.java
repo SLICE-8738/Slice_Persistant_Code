@@ -12,21 +12,12 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.commands.Drivetrain.AlignWithNoteCommand;
-import frc.robot.commands.Intake.StoreNote.StoreNoteSequence;
-import frc.robot.commands.Shooter.EjectNoteCommand;
-import frc.robot.commands.Shooter.ShootCommand;
-import frc.robot.commands.Shooter.SpinFlywheelsCommand;
-import frc.robot.commands.Shooter.SubwooferShotCommand;
-import frc.robot.subsystems.Indexer;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 import java.util.Optional;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
+//import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.config.ModuleConfig;
 import com.pathplanner.lib.config.PIDConstants;
@@ -86,16 +77,10 @@ public class AutoSelector {
     public double initialAutoPoseRotationOffset = 0;
 
     private final Drivetrain m_drivetrain;
-    private final Shooter m_shooter;
-    private final Intake m_intake;
-    private final Indexer m_indexer;
 
-    public AutoSelector(Drivetrain drivetrain, Shooter shooter, Intake intake, Indexer indexer) {
+    public AutoSelector(Drivetrain drivetrain) {
 
         m_drivetrain = drivetrain;
-        m_shooter = shooter;
-        m_intake = intake;
-        m_indexer = indexer;
 
         startingPositionChooser = new SendableChooser<StartingPosition>();
 
@@ -135,12 +120,7 @@ public class AutoSelector {
             () -> DriverStation.getAlliance().get() == Alliance.Red,
             m_drivetrain);
 
-        NamedCommands.registerCommand("Store Note", new StoreNoteSequence(m_indexer, m_intake));
-        NamedCommands.registerCommand("Shoot Note", new ShootCommand(m_shooter, m_indexer, m_drivetrain));
-        NamedCommands.registerCommand("Shoot Note Subwoofer", new SubwooferShotCommand(m_shooter, m_indexer, m_drivetrain));
-        NamedCommands.registerCommand("Spin Flywheels", new SpinFlywheelsCommand(m_shooter, 3500));
-        NamedCommands.registerCommand("Note Align", new AlignWithNoteCommand(m_drivetrain, m_indexer).withTimeout(5));
-        NamedCommands.registerCommand("Eject Note", new EjectNoteCommand(m_shooter, m_indexer));
+        // Register named commands here
 
     }
 

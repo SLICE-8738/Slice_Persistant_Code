@@ -8,8 +8,7 @@ import frc.robot.Button;
 import frc.robot.Constants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.slicelibs.PolarJoystickFilter;
-import frc.slicelibs.util.config.JoystickFilterConfig;
-
+import frc.slicelibs.config.JoystickFilterConfig;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
@@ -17,7 +16,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class SwerveDriveCommand extends Command {
+public class DriveCommand extends Command {
   /** Creates a new SwerveDriveCommand. */
   private final Drivetrain m_drivetrain;
 
@@ -29,7 +28,7 @@ public class SwerveDriveCommand extends Command {
 
   private final PIDController rotationController;
 
-  public SwerveDriveCommand(Drivetrain drivetrain, PS4Controller driverController, boolean isOpenLoop) {
+  public DriveCommand(Drivetrain drivetrain, PS4Controller driverController, boolean isOpenLoop) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
 

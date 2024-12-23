@@ -15,10 +15,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.SerialPort.Port;
-import frc.slicelibs.util.config.CTREConfigs;
-import frc.slicelibs.util.config.REVConfigs;
-import frc.slicelibs.util.config.SwerveModuleConstants;
+
+import frc.slicelibs.config.CTREConfigs;
+import frc.slicelibs.config.REVConfigs;
+import frc.slicelibs.config.SwerveModuleConstants;
+
+import com.studica.frc.AHRS.NavXComType;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -64,7 +66,7 @@ public final class Constants {
   public final class kDrivetrain {
 
     /* Gyro */
-    public static final Port NAVX_PORT = Port.kUSB;
+    public static final NavXComType NAVX_PORT = NavXComType.kUSB1;
     public static final boolean INVERT_GYRO = false; // Always ensure Gyro is CCW+ CW-
 
     /* Swerve Physics */

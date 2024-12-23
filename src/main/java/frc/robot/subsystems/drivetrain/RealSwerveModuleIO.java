@@ -10,6 +10,7 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ControlType;
@@ -28,8 +29,8 @@ import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 
 import frc.robot.Constants;
-import frc.slicelibs.util.config.SwerveModuleConstants;
-import frc.slicelibs.util.math.Conversions;
+import frc.slicelibs.config.SwerveModuleConstants;
+import frc.slicelibs.math.Conversions;
 
 public class RealSwerveModuleIO implements SwerveModuleIO {
     private final Rotation2d angleOffset;
@@ -118,7 +119,7 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
     }
 
     @Override
-    public void setDriveDutyCycle(double percentOutput) {
+    public void runDriveDutyCycle(double percentOutput) {
         driveDutyCycleRequest.Output = percentOutput;
         driveMotor.setControl(driveDutyCycleRequest);
     }

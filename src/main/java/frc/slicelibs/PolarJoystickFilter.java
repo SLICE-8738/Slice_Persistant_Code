@@ -5,7 +5,7 @@
 
 package frc.slicelibs;
 
-import frc.slicelibs.util.config.JoystickFilterConfig;
+import frc.slicelibs.config.JoystickFilterConfig;
 
 /** Add your docs here. */
 public class PolarJoystickFilter {

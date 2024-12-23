@@ -1,4 +1,4 @@
-package frc.slicelibs.util.config;
+package frc.slicelibs.config;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;

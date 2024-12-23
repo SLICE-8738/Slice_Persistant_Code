@@ -5,9 +5,8 @@
 package frc.robot.subsystems.drivetrain;
 
 import frc.robot.*;
-import frc.robot.subsystems.ShooterLimelight;
-import edu.wpi.first.units.Units;
 
+import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -32,9 +31,10 @@ import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
 import com.ctre.phoenix6.SignalLogger;
-import com.kauailabs.navx.frc.AHRS;
 
 import com.pathplanner.lib.util.PathPlannerLogging;
+
+import com.studica.frc.AHRS;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -86,7 +86,7 @@ public class Drivetrain extends SubsystemBase {
       Constants.kDrivetrain.kSwerveKinematics, 
       getHeading(), 
       getModulePositions(), 
-      LimelightHelpers.getBotPose2d_wpiBlue("limelight-shooter"),
+      LimelightHelpers.getBotPose2d_wpiBlue("limelight"),
       VecBuilder.fill(0.1, 0.1, 0.1),
       VecBuilder.fill(0.1, 0.1, 9999999));
 
@@ -191,7 +191,7 @@ public class Drivetrain extends SubsystemBase {
     speeds.discretize(0.02);
 
     SwerveModuleState[] states = Constants.kDrivetrain.kSwerveKinematics.toSwerveModuleStates(speeds);
-    SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.kDrivetrain.MAX_MODULE_VELOCITY);
+    SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.kDrivetrain.MAX_LINEAR_VELOCITY);
 
     runSetpoints(states, isOpenLoop);
 
@@ -209,7 +209,7 @@ public class Drivetrain extends SubsystemBase {
 
     if (!DriverStation.isAutonomousEnabled()) {
 
-      LimelightHelpers.SetRobotOrientation("limelight-shooter", getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
+      LimelightHelpers.SetRobotOrientation("limelight", getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
       LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight-shooter");
 
       if (estimate.tagCount >= 2) {
@@ -243,31 +243,6 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  /**
-   * Returns the current pose of either the blue or red speaker
-   * relative to the robot depending on the selected team station.
-   * 
-   * @return The current robot-relative pose of the speaker.
-   */
-  public Translation2d getSpeakerPosition() {
-
-    Translation2d difference = DriverStation.getAlliance().get() == Alliance.Blue? 
-      Constants.kFieldPositions.BLUE_SPEAKER_POSITION.minus(getPose().getTranslation())
-      : Constants.kFieldPositions.RED_SPEAKER_POSITION.minus(getPose().getTranslation());
-
-    return difference;
-
-  }
-
-  /**
-   * @return The current distance of the robot from the primary in-view AprilTag
-   */
-  public double getAprilTagDistance() {
-
-    return Constants.kFieldPositions.APRILTAG_POSITIONS[(int) ShooterLimelight.getTable().getAprilTagID() - 1].getDistance(getPose().getTranslation());
-
-  }
-
   public boolean atAllianceWing() {
     Alliance alliance = DriverStation.getAlliance().get();
     double x = m_odometry.getEstimatedPosition().getX();
@@ -277,20 +252,6 @@ public class Drivetrain extends SubsystemBase {
     } else {
       return x > 16.54 - 5.87248;
     }
-  }
-
-  /**
-   * Calculates and returns whether the robot is within
-   * the tuned shooting range.
-   * 
-   * @return Whether the robot is in range.
-   */
-  public boolean inShootingRange() {
-
-    Translation2d speaker = getSpeakerPosition();
-
-    return Math.hypot(speaker.getX(), speaker.getY()) <= 3;
-
   }
 
   /**
@@ -417,11 +378,11 @@ public class Drivetrain extends SubsystemBase {
 
   /**
    * Resets the rotation of the odometry object to the rotation received from
-   * the shooter limelight.
+   * the limelight.
    */
   public void resetToAprilTagRotation() {
 
-    resetRotation(ShooterLimelight.getTable().getLastBotPoseBlue().getRotation());
+    resetRotation(LimelightHelpers.getBotPose2d_wpiBlue("limelight").getRotation());
 
   }
 
