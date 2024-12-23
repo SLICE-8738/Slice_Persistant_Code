@@ -210,11 +210,11 @@ public class Drivetrain extends SubsystemBase {
     if (!DriverStation.isAutonomousEnabled()) {
 
       LimelightHelpers.SetRobotOrientation("limelight", getPose().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-      LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight-shooter");
+      LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
 
       if (estimate.tagCount >= 2) {
 
-        Translation3d aprilTagPosition = LimelightHelpers.getTargetPose3d_CameraSpace("limelight-shooter").getTranslation();
+        Translation3d aprilTagPosition = LimelightHelpers.getTargetPose3d_CameraSpace("limelight").getTranslation();
 
         if (Math.hypot(aprilTagPosition.getX(), aprilTagPosition.getZ()) <= 4.5) {
         
@@ -241,17 +241,6 @@ public class Drivetrain extends SubsystemBase {
 
     return m_odometry.getEstimatedPosition();
 
-  }
-
-  public boolean atAllianceWing() {
-    Alliance alliance = DriverStation.getAlliance().get();
-    double x = m_odometry.getEstimatedPosition().getX();
-
-    if (alliance == Alliance.Blue) {
-      return x < 5.87248;
-    } else {
-      return x > 16.54 - 5.87248;
-    }
   }
 
   /**
@@ -442,11 +431,6 @@ public class Drivetrain extends SubsystemBase {
 
     return Rotation2d.fromDegrees(Constants.kDrivetrain.INVERT_GYRO? -m_gyro.getRate() : m_gyro.getRate());
 
-  }
-
-  public boolean facingDoubleSub() {
-    double degrees = getPose().getRotation().getDegrees();
-    return (degrees > 0 && degrees < 45) || (degrees > 315 && degrees < 360) || (degrees > 135 && degrees < 225);
   }
 
   /**

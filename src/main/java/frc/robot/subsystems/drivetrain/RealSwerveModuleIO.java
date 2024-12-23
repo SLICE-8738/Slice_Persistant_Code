@@ -43,7 +43,7 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
 
         /* Drive Motor Config */
         driveMotor = new SparkMax(moduleConstants.driveMotorID, MotorType.kBrushless);
-        driveMotor.configure(Constants.REV_CONFIGS.angleSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        driveMotor.configure(Constants.REV_CONFIGS.driveSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         driveEncoder = driveMotor.getEncoder();
         drivePID = driveMotor.getClosedLoopController();
         driveMotor.setCANTimeout(200);
@@ -88,11 +88,6 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
     }
 
     @Override
-    public void runAngleDutyCycle(double percentOutput) {
-        angleMotor.set(percentOutput);
-    }
-
-    @Override
     public void setDriveVoltage(double volts) {
         driveMotor.setVoltage(volts);
     }
@@ -104,6 +99,11 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
             ControlType.kVelocity, 
             0, 
             driveFeedforward.calculate(Units.MetersPerSecond.of(velocity)).in(Units.Volts));
+    }
+
+    @Override
+    public void runAngleDutyCycle(double percentOutput) {
+        angleMotor.set(percentOutput);
     }
 
     @Override
