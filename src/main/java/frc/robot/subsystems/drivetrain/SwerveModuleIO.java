@@ -46,7 +46,7 @@ public interface SwerveModuleIO {
 
   /** 
    * Reset the integrated angle encoder position to
-   * the position of the CANcoder with the offset.
+   * the position of the absolute encoder with the offset.
    */
   public default void resetToAbsolute() {}
 }

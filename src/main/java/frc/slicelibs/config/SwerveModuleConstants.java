@@ -13,7 +13,7 @@ public class SwerveModuleConstants {
    *
    * @param driveMotorID
    * @param angleMotorID
-   * @param canCoderID
+   * @param absoluteEncoderID
    * @param angleOffset
    */
   public SwerveModuleConstants(

@@ -111,8 +111,8 @@ public class AutoSelector {
                     Constants.kDrivetrain.WHEEL_DIAMETER / 2,
                     Constants.kDrivetrain.MAX_LINEAR_VELOCITY,
                     Constants.kDrivetrain.WHEEL_COEFFICIENT_OF_FRICTION,
-                    DCMotor.getKrakenX60(1).withReduction(Constants.kDrivetrain.DRIVE_GEAR_RATIO),
-                    Constants.kDrivetrain.DRIVE_SUPPLY_CURRENT_LIMIT,
+                    DCMotor.getNEO(1).withReduction(Constants.kDrivetrain.DRIVE_GEAR_RATIO),
+                    Constants.kDrivetrain.DRIVE_CURRENT_LIMIT,
                     1),
                 Constants.kDrivetrain.TRACK_WIDTH,
                 Constants.kDrivetrain.WHEEL_BASE

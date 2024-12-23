@@ -320,8 +320,8 @@ public class Drivetrain extends SubsystemBase {
    * in degrees from the absolute encoders of all swerve modules 
    * without offsets.
    * 
-   * @return The current absolute angle readings in degrees from the CANCoders
-   *         of all swerve modules without offsets.
+   * @return The current absolute angle readings in degrees from the absolute
+   *         encoders of all swerve modules without offsets.
    */
   public double[] getAbsoluteAngles() {
 

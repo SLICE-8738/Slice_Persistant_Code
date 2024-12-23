@@ -9,6 +9,7 @@ public class REVConfigs {
 
     public final SparkMaxConfig defaultVelocitySparkMaxConfig = new SparkMaxConfig();
     public final SparkMaxConfig defaultPositionSparkMaxConfig = new SparkMaxConfig();
+    public final SparkMaxConfig driveSparkMaxConfig = new SparkMaxConfig();
     public final SparkMaxConfig angleSparkMaxConfig = new SparkMaxConfig();
 
     public REVConfigs() {
@@ -52,14 +53,43 @@ public class REVConfigs {
             /* Voltage Compensation */
             defaultPositionSparkMaxConfig.voltageCompensation(12);
 
+        /* Swerve Module Drive Motor Configuration */
+
+            /* Motor Invert and Idle Mode */
+            driveSparkMaxConfig.inverted(Constants.kDrivetrain.DRIVE_INVERT);
+            driveSparkMaxConfig.idleMode(Constants.kDrivetrain.DRIVE_IDLE_MODE);
+
+            /* Current Limiting */
+            driveSparkMaxConfig.smartCurrentLimit(Constants.kDrivetrain.DRIVE_CURRENT_LIMIT);
+
+            /* Open and Closed Loop Ramping */
+            driveSparkMaxConfig.openLoopRampRate(Constants.kDrivetrain.OPEN_LOOP_RAMP);
+            driveSparkMaxConfig.closedLoopRampRate(Constants.kDrivetrain.CLOSED_LOOP_RAMP);
+
+            /* Status Frame Periods */
+            driveSparkMaxConfig.signals.primaryEncoderVelocityPeriodMs(Constants.kDrivetrain.DRIVE_VELOCITY_PERIOD_MS);
+            driveSparkMaxConfig.signals.primaryEncoderPositionPeriodMs(Constants.kDrivetrain.DRIVE_POSITION_PERIOD_MS);
+
+            /* Voltage Compensation */
+            driveSparkMaxConfig.voltageCompensation(12);
+
+            /* Conversion Factors */
+            driveSparkMaxConfig.encoder.positionConversionFactor(Constants.kDrivetrain.DRIVE_POSITION_CONVERSION_FACTOR);
+            driveSparkMaxConfig.encoder.velocityConversionFactor(Constants.kDrivetrain.DRIVE_VELOCITY_CONVERSION_FACTOR);
+
+            /* PID */
+            driveSparkMaxConfig.closedLoop.p(Constants.kDrivetrain.DRIVE_KP);
+            driveSparkMaxConfig.closedLoop.i(Constants.kDrivetrain.DRIVE_KI);
+            driveSparkMaxConfig.closedLoop.d(Constants.kDrivetrain.DRIVE_KD);
+
         /* Swerve Module Angle Motor Configuration */
 
             /* Motor Invert and Idle Mode */
-            angleSparkMaxConfig.inverted(Constants.kShooter.AIM_INVERT);
-            angleSparkMaxConfig.idleMode(Constants.kShooter.AIM_IDLE_MODE);
+            angleSparkMaxConfig.inverted(Constants.kDrivetrain.ANGLE_INVERT);
+            angleSparkMaxConfig.idleMode(Constants.kDrivetrain.ANGLE_IDLE_MODE);
 
             /* Current Limiting */
-            angleSparkMaxConfig.smartCurrentLimit(20);
+            angleSparkMaxConfig.smartCurrentLimit(Constants.kDrivetrain.ANGLE_CURRENT_LIMIT);
 
             /* Open and Closed Loop Ramping */
             angleSparkMaxConfig.openLoopRampRate(0);
@@ -73,13 +103,13 @@ public class REVConfigs {
             angleSparkMaxConfig.voltageCompensation(12);
 
             /* Conversion Factors */
-            angleSparkMaxConfig.encoder.positionConversionFactor(Constants.kDrivetrain.DRIVE_POSITION_CONVERSION_FACTOR);
-            angleSparkMaxConfig.encoder.velocityConversionFactor(Constants.kDrivetrain.DRIVE_VELOCITY_CONVERSION_FACTOR);
+            angleSparkMaxConfig.encoder.positionConversionFactor(Constants.kDrivetrain.ANGLE_POSITION_CONVERSION_FACTOR);
+            angleSparkMaxConfig.encoder.velocityConversionFactor(Constants.kDrivetrain.ANGLE_VELOCITY_CONVERSION_FACTOR);
 
             /* PID */
-            angleSparkMaxConfig.closedLoop.p(Constants.kDrivetrain.DRIVE_KP);
-            angleSparkMaxConfig.closedLoop.i(Constants.kDrivetrain.DRIVE_KI);
-            angleSparkMaxConfig.closedLoop.d(Constants.kDrivetrain.DRIVE_KD);
+            angleSparkMaxConfig.closedLoop.p(Constants.kDrivetrain.ANGLE_KP);
+            angleSparkMaxConfig.closedLoop.i(Constants.kDrivetrain.ANGLE_KI);
+            angleSparkMaxConfig.closedLoop.d(Constants.kDrivetrain.ANGLE_KD);
     }
 
 }
