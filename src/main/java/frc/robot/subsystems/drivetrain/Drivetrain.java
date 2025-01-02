@@ -121,9 +121,9 @@ public class Drivetrain extends SubsystemBase {
       .beforeStarting(SignalLogger::start).andThen(SignalLogger::stop));
     sysIDChooser.addOption("Quasistatic Reverse", sysIDDriveRoutine.quasistatic(Direction.kReverse)
       .beforeStarting(SignalLogger::start).andThen(SignalLogger::stop));
-    sysIDChooser.addOption("Dynamic Forward", sysIDDriveRoutine.quasistatic(Direction.kForward)
+    sysIDChooser.addOption("Dynamic Forward", sysIDDriveRoutine.dynamic(Direction.kForward)
       .beforeStarting(SignalLogger::start).andThen(SignalLogger::stop));
-    sysIDChooser.addOption("Dynamic Reverse", sysIDDriveRoutine.quasistatic(Direction.kReverse)
+    sysIDChooser.addOption("Dynamic Reverse", sysIDDriveRoutine.dynamic(Direction.kReverse)
       .beforeStarting(SignalLogger::start).andThen(SignalLogger::stop));
 
   }
@@ -185,12 +185,20 @@ public class Drivetrain extends SubsystemBase {
       rotationWithOffset.plus(Rotation2d.fromDegrees(360));
     }
 
-    ChassisSpeeds speeds = new ChassisSpeeds(transform.getX(), transform.getY(), transform.getRotation().getRadians());
+    SwerveModuleState[] states = Constants.kDrivetrain.kSwerveKinematics.toSwerveModuleStates(
+          ChassisSpeeds.discretize(
+            isFieldRelative ?
+              ChassisSpeeds.fromFieldRelativeSpeeds(
+                transform.getX(),
+                transform.getY(),
+                transform.getRotation().getRadians(),
+                rotationWithOffset)
+              : new ChassisSpeeds(
+                transform.getX(), 
+                transform.getY(),
+                transform.getRotation().getRadians()),
+            0.02));    
 
-    speeds.toRobotRelativeSpeeds(rotationWithOffset);
-    speeds.discretize(0.02);
-
-    SwerveModuleState[] states = Constants.kDrivetrain.kSwerveKinematics.toSwerveModuleStates(speeds);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.kDrivetrain.MAX_LINEAR_VELOCITY);
 
     runSetpoints(states, isOpenLoop);
@@ -241,17 +249,6 @@ public class Drivetrain extends SubsystemBase {
 
     return m_odometry.getEstimatedPosition();
 
-  }
-
-  public boolean atAllianceWing() {
-    Alliance alliance = DriverStation.getAlliance().get();
-    double x = m_odometry.getEstimatedPosition().getX();
-
-    if (alliance == Alliance.Blue) {
-      return x < 5.87248;
-    } else {
-      return x > 16.54 - 5.87248;
-    }
   }
 
   /**
@@ -444,11 +441,6 @@ public class Drivetrain extends SubsystemBase {
 
   }
 
-  public boolean facingDoubleSub() {
-    double degrees = getPose().getRotation().getDegrees();
-    return (degrees > 0 && degrees < 45) || (degrees > 315 && degrees < 360) || (degrees > 135 && degrees < 225);
-  }
-
   /**
    * Obtains and returns the current pitch of the robot from -180 to 180 degrees from the gyro object.
    * 
@@ -504,8 +496,10 @@ public class Drivetrain extends SubsystemBase {
    */
   public void runChassisSpeeds(ChassisSpeeds speeds) {
 
-    speeds.discretize(0.02);
-    runSetpoints(Constants.kDrivetrain.kSwerveKinematics.toSwerveModuleStates(speeds), false);
+    runSetpoints(
+      Constants.kDrivetrain.kSwerveKinematics.toSwerveModuleStates(
+        ChassisSpeeds.discretize(speeds, 0.02)), 
+      false);
 
   }
 

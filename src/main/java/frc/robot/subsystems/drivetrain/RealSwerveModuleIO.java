@@ -21,7 +21,6 @@ import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
@@ -138,7 +137,7 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
     @Override
     public void setDriveVelocity(double velocity) {
         driveVelocityRequest.Velocity = velocity;
-        driveVelocityRequest.FeedForward = driveFeedforward.calculate(Units.MetersPerSecond.of(velocity)).in(Units.Volts);
+        driveVelocityRequest.FeedForward = driveFeedforward.calculate(velocity);
         driveMotor.setControl(driveVelocityRequest);
     }
 
