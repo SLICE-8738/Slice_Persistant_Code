@@ -98,7 +98,7 @@ public class RealSwerveModuleIO implements SwerveModuleIO {
             velocity, 
             ControlType.kVelocity, 
             0, 
-            driveFeedforward.calculate(Units.MetersPerSecond.of(velocity)).in(Units.Volts));
+            driveFeedforward.calculate(velocity));
     }
 
     @Override

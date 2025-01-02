@@ -10,15 +10,18 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.units.Units;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 
 import frc.robot.Constants;
 import frc.slicelibs.math.Conversions;
 
 public class SimSwerveModuleIO implements SwerveModuleIO {
-  private final DCMotorSim driveMotor = new DCMotorSim(LinearSystemId.createDCMotorSystem(Constants.kDrivetrain.DRIVE_KV, Constants.kDrivetrain.DRIVE_KA), DCMotor.getKrakenX60(1).withReduction(Constants.kDrivetrain.DRIVE_GEAR_RATIO));
-  private final DCMotorSim angleMotor = new DCMotorSim(LinearSystemId.createDCMotorSystem(Constants.kDrivetrain.ANGLE_KV, Constants.kDrivetrain.ANGLE_KA), DCMotor.getNEO(1).withReduction(Constants.kDrivetrain.ANGLE_GEAR_RATIO));
+  private final DCMotorSim driveMotor = new DCMotorSim(
+    LinearSystemId.createDCMotorSystem(Constants.kDrivetrain.DRIVE_KV, Constants.kDrivetrain.DRIVE_KA), 
+    DCMotor.getKrakenX60(1).withReduction(Constants.kDrivetrain.DRIVE_GEAR_RATIO));
+  private final DCMotorSim angleMotor = new DCMotorSim(
+    LinearSystemId.createDCMotorSystem(Constants.kDrivetrain.ANGLE_KV, Constants.kDrivetrain.ANGLE_KA), 
+    DCMotor.getNEO(1).withReduction(Constants.kDrivetrain.ANGLE_GEAR_RATIO));
 
   private final SimpleMotorFeedforward driveFeedforward = new SimpleMotorFeedforward(0.0, Constants.kDrivetrain.DRIVE_KV);
   private final PIDController drivePID = new PIDController(0.1, 0.0, 0.0);
@@ -55,7 +58,7 @@ public class SimSwerveModuleIO implements SwerveModuleIO {
     driveAppliedVolts = MathUtil.clamp(
       drivePID.calculate(
         Conversions.RPMToMPS(driveMotor.getAngularVelocityRPM(), Constants.kDrivetrain.WHEEL_CIRCUMFERENCE), 
-        velocity) + driveFeedforward.calculate(Units.MetersPerSecond.of(velocity)).in(Units.Volts), 
+        velocity) + driveFeedforward.calculate(velocity), 
       -12, 
       12);
     driveMotor.setInputVoltage(driveAppliedVolts);
