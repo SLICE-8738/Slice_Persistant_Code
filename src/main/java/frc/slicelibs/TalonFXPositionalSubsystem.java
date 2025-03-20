@@ -28,16 +28,41 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
 
     /**
      * Construct a new Positional Subsystem
-     * @param ids an array of CAN ids for every positionally controlled motor in the subsystem. All motors should rotate together, if additional motors should spin seperately, add them in the superclass
-     * @param inverted an array of booleans indicating whether the motor of the corresponding CAN id is inverted. This should be the same length as ids. true is CCW+ false is CW+.
-     * @param kP the p gain of the subsystem (in volts per unit).
-     * @param kI the i gain of the subsystem (in volts per unit seconds).
-     * @param kD the d gain of the subsystem (in volts per units per second).
-     * @param kG the g gain of the subsystem (in volts). 
-     * @param sensorToMechRatio the ratio from the output shaft of the motor to the output of the mechanism. >1 is a reduction. This should be used for gear ratios, not unit conversions.
-     * @param positionConversionFactor the number that, when multiplied by the mechanism's rotations, gives the position of the mechanism in desired units. This should be used for unit conversions, not gear ratios.
-     * @param velocityConversionFactor the number that, when multiplied by the mechanism's rotations per second, gives the velocity of the mechanism in desired units. This should be used for unit conversions, not gear ratios.
-     * @param motorConfigs the configs for the provided motor. The Slot0 PID controller, InvertedValue, and SensorToMechanismRatio will be overriden by other parameters.
+     * 
+     * @param ids                      an array of CAN ids for every positionally
+     *                                 controlled motor in the subsystem. All motors
+     *                                 should rotate together, if additional motors
+     *                                 should spin seperately, add them in the
+     *                                 superclass
+     * @param inverted                 an array of booleans indicating whether the
+     *                                 motor of the corresponding CAN id is
+     *                                 inverted. This should be the same length as
+     *                                 ids. true is CCW+ false is CW+.
+     * @param kP                       the p gain of the subsystem (in volts per
+     *                                 unit).
+     * @param kI                       the i gain of the subsystem (in volts per
+     *                                 unit seconds).
+     * @param kD                       the d gain of the subsystem (in volts per
+     *                                 units per second).
+     * @param kG                       the g gain of the subsystem (in volts).
+     * @param sensorToMechRatio        the ratio from the output shaft of the motor
+     *                                 to the output of the mechanism. >1 is a
+     *                                 reduction. This should be used for gear
+     *                                 ratios, not unit conversions.
+     * @param positionConversionFactor the number that, when multiplied by the
+     *                                 mechanism's rotations, gives the position of
+     *                                 the mechanism in desired units. This should
+     *                                 be used for unit conversions, not gear
+     *                                 ratios.
+     * @param velocityConversionFactor the number that, when multiplied by the
+     *                                 mechanism's rotations per second, gives the
+     *                                 velocity of the mechanism in desired units.
+     *                                 This should be used for unit conversions, not
+     *                                 gear ratios.
+     * @param motorConfigs             the configs for the provided motor. The Slot0
+     *                                 PID controller, InvertedValue, and
+     *                                 SensorToMechanismRatio will be overriden by
+     *                                 other parameters.
      */
     public TalonFXPositionalSubsystem(int[] ids, boolean[] inverted, double kP, double kI, double kD, double kG,
             double sensorToMechRatio,
@@ -115,7 +140,7 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
      * Sets the target position of the subsystem, which it will approach using its
      * internal PID controller.
      * 
-     * @param velocity a value in the units defined by the positionConversionFactor
+     * @param position a value in the units defined by the positionConversionFactor
      */
     public void setPosition(double position) {
         PositionVoltage request = new PositionVoltage(0).withSlot(0);
@@ -127,7 +152,8 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
     }
 
     /**
-     * Changes the encoders of all positional motors to read that they are at the
+     * Changes the relative encoders of all positional motors to read that they are
+     * at the
      * given position
      * 
      * @param position a value in the units defined by the positionConversionFactor
@@ -141,7 +167,7 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
     /**
      * Returns an array of the positions of all motors.
      * 
-     * @return the subsystems's position, in the units defined by the
+     * @return an array of each motor's position, in the units defined by the
      *         positionConversionFactor
      */
     public double[] getPositions() {
@@ -155,7 +181,7 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
     /**
      * Returns an array the stator currents of all motors.
      * 
-     * @return the subsystems stator current values.
+     * @return an array of the stator current values.
      * 
      */
     public double[] getStatorCurrents() {
@@ -168,9 +194,9 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
     }
 
     /**
-     * Returns the average velocity reading across all positional motors.
+     * Returns an array of the velocities of all motors.
      * 
-     * @return the subsystems's velocity, in the units defined by the
+     * @return an array of each motor's velocity, in the units defined by the
      *         velocityConversionFactor
      */
     public double[] getVelocity() {
@@ -187,7 +213,8 @@ public class TalonFXPositionalSubsystem extends SubsystemBase {
      * 
      * @param threshold the maximum acceptable error, in the units defined by either
      *                  positionConversionFactor or velocityConversionFactor
-     * @return true if the subsystem is near its target, false if otherwise (or if
+     * @return true if the subsystem is within threshold of the target, false if
+     *         otherwise (or if
      *         the subsystem was last controlled using set() or setVoltage())
      */
     public boolean atTarget(double threshold) {
